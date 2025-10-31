@@ -66,5 +66,18 @@ input_data = np.array([[
 
 # ---- Predict ----
 if st.button("Predict Yield"):
-    prediction = model.predict(input_data)
-    st.success(f"🌱 Predicted Crop Yield: {prediction[0]:.2f}")
+    prediction = model.predict(input_data)[0]
+
+    # --- Convert and format output meaningfully ---
+    yield_value = round(prediction, 2)  # rounded number
+    yield_ton = yield_value / 1000      # convert kg→tons if applicable
+
+    st.success(
+        f"🌾 Based on {season} season conditions in {state} for {crop}, "
+        f"the predicted crop yield is **{yield_ton:.2f} tons per hectare.**"
+    )
+
+    st.caption(
+        "💡 Note: 1 ton = 1000 kg. Actual yield values may vary depending on rainfall, soil, and local conditions."
+    )
+
