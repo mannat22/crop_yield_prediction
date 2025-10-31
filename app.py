@@ -45,12 +45,21 @@ state_options = {
 crop = st.selectbox("Crop Type", list(crop_options.keys()))
 season = st.selectbox("Season", list(season_options.keys()))
 state = st.selectbox("State", list(state_options.keys()))
+area_options = {
+    "Very Small (≤ 1 hectare)": 0.1,
+    "Small (1–2 hectares)": 0.3,
+    "Medium (2–5 hectares)": 0.5,
+    "Large (5–10 hectares)": 0.7,
+    "Very Large (≥ 10 hectares)": 0.9
+}
 
-area = st.slider("Area (normalized)", 0.0, 1.0, 0.5)
-production = st.slider("Production (normalized)", 0.0, 1.0, 0.5)
-rainfall = st.slider("Annual Rainfall (normalized)", 0.0, 1.0, 0.5)
-fertilizer = st.slider("Fertilizer (normalized)", 0.0, 1.0, 0.5)
-pesticide = st.slider("Pesticide (normalized)", 0.0, 1.0, 0.5)
+area_label = st.selectbox("Area Size", list(area_options.keys()))
+area = area_options[area_label]
+
+production = st.slider("Production ", 0.0, 1.0, 0.5)
+rainfall = st.slider("Annual Rainfall ", 0.0, 1.0, 0.5)
+fertilizer = st.slider("Fertilizer ", 0.0, 1.0, 0.5)
+pesticide = st.slider("Pesticide ", 0.0, 1.0, 0.5)
 
 # ---- Convert text input to encoded values for model ----
 input_data = np.array([[
